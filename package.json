@@ -1,0 +1,23 @@
+{
+  "name": "vue3Test",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "dev": "node scripts/dev.js  reactivity -f esm"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "vue": "^3.5.27"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2",
+    "minimist": "^1.2.8",
+    "typescript": "^5.9.3"
+  }
+}
