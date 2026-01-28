@@ -1,22 +1,28 @@
-.npmrc 中写一个命令
-shamefully-hoist=true
-目的是会把安装的包vue时的所有插件全部拍平在node_modules中
-比如引入postcss
-import postcss from '@vue/postcss'
-拍平后
-import postcss from 'postcss'
 
-## reactivity 项目引入shared方法如果引入的是node_modules下的方法说明没有配置ts映射
-import { isObject } from '@vue/shared' == > node_modules/@vue/shared
-在tsconfig.json配置=> 
+
+## reactivity 问题一
 ```java
-"baseUrl":".",
-    "paths":{
-        "@vue/*":["packages/*/src"]
-    }
+let obj = {
+    name:"浩",
+    age:20
+}
+const state1 = reactive(obj)
+const state2 = reactive(obj)
+console.log(state1 === state2)
 ```
 
-## 给reactivity项目安装shared包命令
-pnpm install @vue/shared --workspace --filter @vue/reactivity
+假如weakmap缓存代理后的对象,防止重复代理
 
-## 运行npm run dev 命令在node环境进行对reactivity代码工程化打包
+## reactivity 问题二
+```java
+const state1 = reactive(obj)
+const state2 = reactive(state1)
+console.log(state1 === state2)
+```
+
+增加get标识符,防止重复赋值get,set方法
+
+## reactivity 问题三为什么要用Reflect
+案例见Reflect.js
+<!-- Reflect反射是反射什么,面试有问 -->
+<!-- Reflect为什么一般要和Proxy一起使用 -->
